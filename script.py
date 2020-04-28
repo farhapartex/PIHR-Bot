@@ -9,9 +9,9 @@ import pandas as pd, numpy as np
 import time, sys
 
 class PIHRBot:
-    def __init__(self, username, password):
+    def __init__(self, username, password, company_name):
         self.username, self.password = username, password
-        self.url = "http://strativ.pihr.xyz/Login/Index"
+        self.url = "http://{0}.pihr.xyz/Login/Index".format(self.company_name)
         self.chrome_driver_path = "/home/nazmul/Documents/myProjects/scrapper/pi-hr-scrapper/chromedriver"
         self.webdriver = None
         
