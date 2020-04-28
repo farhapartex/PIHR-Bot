@@ -6,12 +6,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.expected_conditions import presence_of_element_located
 
 import pandas as pd, numpy as np
-import time, sys
+import datetime, time, sys
 
 class PIHRBot:
     def __init__(self, username, password, company_name):
         self.username, self.password = username, password
-        self.url = "http://{0}.pihr.xyz/Login/Index".format(self.company_name)
+        self.url = "http://{0}.pihr.xyz/Login/Index".format(company_name)
         self.chrome_driver_path = "/home/nazmul/Documents/myProjects/scrapper/pi-hr-scrapper/chromedriver"
         self.webdriver = None
         
@@ -27,7 +27,15 @@ class PIHRBot:
             options = chrome_options
             )
     
-    def give_attendence(self):
+    def get_in_time(self):
+        now = datetime.datetime.now()
+        return now.replace(hour=10, minute=0, second=0, microsecond=0)
+    
+    def get_out_time(self):
+        now = datetime.datetime.now()
+        return now.replace(hour=17, minute=30, second=0, microsecond=0)
+    
+    def give_attendence(self, mission=None):
         with self.webdriver as driver:
             wait = WebDriverWait(driver, 10)
             print("Mission started! Wait...")
@@ -43,10 +51,17 @@ class PIHRBot:
             
             
             wait.until(presence_of_element_located((By.CSS_SELECTOR, ".profile-sidebar-portlet")))
-            results = driver.find_elements_by_class_name("profile-usertitle")
+            results = driver.find_elements_by_class_name("profile-usertitle-name")
+            print("Hello, {0}".format(results[0].text))
             
-            for ch in results:
-                print(ch.text)
+            if mission and mission == "in":
+                set_in_button = driver.find_element_by_id("btnSetInTime")
+                set_in_button.click()
+                print("Good morning! Your attendence has been set!")
+            elif mission and mission == "out":
+                set_out_button = driver.find_element_by_id("btnSetOutTime")
+                set_out_button.click()
+                print("Good afternoon! Your set out time has been set!")
                 
             driver.close()
         
@@ -62,10 +77,10 @@ if __name__ == "__main__":
             print("Please provide username and password")
         else:
             break
-        
-    bot = PIHRBot(username=username, password=password)
+    mission = input("Mission: ")
+    bot = PIHRBot(username=username, password=password, company_name="strativ")
     
-    if bot.give_attendence():
+    if bot.give_attendence(mission):
         print("Mission is done! yeee!")
     else:
         print("It seems there are some problems. Try again!")
