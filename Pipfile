@@ -9,6 +9,8 @@ verify_ssl = true
 selenium = "*"
 pandas = "*"
 numpy = "*"
+celery = "*"
+redis = "*"
 
 [requires]
 python_version = "3.7"
