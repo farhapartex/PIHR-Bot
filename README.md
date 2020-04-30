@@ -17,16 +17,16 @@ To use this bot, you have to follow one time installation process. It may take f
 
 ### Choose & download your browser driver
 This bot use headless browser driver. So you need to download your own driver. You can select which browser you want to use. From below link choose your one's
-* For chrome navigate to this (Google Chrome)[https://sites.google.com/a/chromium.org/chromedriver/downloads]
-* For Firefox navigate to this (Firefox)[https://github.com/mozilla/geckodriver/releases]
-* For Edge navigate to this (Edge)[https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/]
-* For Safari navigate to this (Safari)[https://webkit.org/blog/6900/webdriver-support-in-safari-10/]
+* For chrome navigate to this [Google Chrome](https://sites.google.com/a/chromium.org/chromedriver/downloads)
+* For Firefox navigate to this [Firefox](https://github.com/mozilla/geckodriver/releases)
+* For Edge navigate to this [Edge](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/)
+* For Safari navigate to this [Safari](https://webkit.org/blog/6900/webdriver-support-in-safari-10/)
 
 Before downloading your browser driver, don't forget to choose your os and browser version. Suppose you want to use google chrome browse. Then check version of google chrome of your computer.
 Now create a folder named with `driver` and keep your browser driver in this `driver` folder. Please don't put your browser driver out of driver folder, otherwise it raise an error!
 
 ### Install RabbitMQ
-Install RabbitMQ from this link (RabbitMQ)[https://www.rabbitmq.com/download.html]
+Install RabbitMQ from this link [RabbitMQ](https://www.rabbitmq.com/download.html)
 For linux ubuntu user, open terminal and run commands from bellow to install RabbitMQ:
 * `sudo apt-get install rabbitmq-server`
 * `sudo rabbitmqctl add_user myuser mypassword`
