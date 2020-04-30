@@ -23,16 +23,16 @@ This bot use headless browser driver. So you need to download your own driver. Y
 * For Safari navigate to this [Safari](https://webkit.org/blog/6900/webdriver-support-in-safari-10/)
 
 Before downloading your browser driver, don't forget to choose your os and browser version. Suppose you want to use google chrome browse. Then check version of google chrome of your computer.
-Now create a folder named with `driver` and keep your browser driver in this `driver` folder. Please don't put your browser driver out of driver folder, otherwise it raise an error!
+Now create a folder named with `driver` and keep your browser driver in this `driver` folder. **Please don't put your downloaded browser driver out of driver folder, otherwise it raise an error!**
 
 ### Install RabbitMQ
-Install RabbitMQ from this link [RabbitMQ](https://www.rabbitmq.com/download.html)
-For linux ubuntu user, open terminal and run commands from bellow to install RabbitMQ:
+Install RabbitMQ from this link [RabbitMQ](https://www.rabbitmq.com/download.html). For linux ubuntu user, open terminal and run commands from bellow to install `RabbitMQ`:
 * `sudo apt-get install rabbitmq-server`
 * `sudo rabbitmqctl add_user myuser mypassword`
 * `sudo rabbitmqctl add_vhost myvhost`
 * `sudo rabbitmqctl set_user_tags myuser mytag`
 * `sudo rabbitmqctl set_permissions -p myvhost myuser ".*" ".*" ".*"`
+
 Substitute in appropriate values for `myuser`, `mypassword` and `myvhost` above
 
 Installation complete! Now let's use this bot.
