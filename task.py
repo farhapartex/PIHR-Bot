@@ -3,6 +3,7 @@ from celery.task.schedules import crontab
 from celery.decorators import periodic_task
 from celery.utils.log import get_task_logger
 import time
+from bot import PIHRBot
 
 logger = get_task_logger(__name__)
 
@@ -10,25 +11,25 @@ logger = get_task_logger(__name__)
 app = Celery('periodic', broker="pyamqp://guest@localhost//")
 
 @app.task
-def login():
-    logger.info("It is night 8:50")
-    print("See you in user login!")
+def get_in():
+    bot = PIHRBot()
+    bot.get_in()
 
 @app.task
-def get_in():
-    logger.info("It is night 8:52")
-    print("See you in get in!")
+def get_out():
+    bot = PIHRBot()
+    bot.get_out()
 
 
 app.conf.beat_schedule = {
     "user-login": {
-        "task": "task.login",
-        "schedule": crontab(hour=20, minute=50),
+        "task": "task.get_in",
+        "schedule": crontab(hour=21, minute=5),
         'args': None,
     },
     "user-get-in": {
-        "task": "task.get_in",
-        "schedule": crontab(hour=20, minute=52),
+        "task": "task.get_out",
+        "schedule": crontab(hour=21, minute=6),
         'args': None,
     }
 }

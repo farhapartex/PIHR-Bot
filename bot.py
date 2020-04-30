@@ -15,12 +15,11 @@ class PIHRBot:
         self._username, self._password = credentials[0], credentials[1]
         self._url = "http://{0}.pihr.xyz/Login/Index".format("strativ")
         self._chrome_driver_path, self._webdriver = "", None
-        self.get_ready_browser()
-        self.get_login()
-        self.get_in()
+        self._get_ready_browser()
+        self._get_login()
     
     
-    def get_ready_browser(self):
+    def _get_ready_browser(self):
         try:
             chrome_options = Options()
             chrome_options.add_argument("--headless")
@@ -34,7 +33,7 @@ class PIHRBot:
             print("Driver not found!")
         
     
-    def get_login(self):
+    def _get_login(self):
         wait = WebDriverWait(self._webdriver, 10)
         print("Mission started! Wait...")
         self._webdriver.get(self._url)
@@ -61,37 +60,6 @@ class PIHRBot:
     
     def driver_close(self):
         self._webdriver.close()
-
-    
-    def give_attendance(self, mission=None):
-        with self._webdriver as driver:
-            wait = WebDriverWait(driver, 10)
-            print("Mission started! Wait...")
-            driver.get(self._url)
-            # get fields
-            username_field = driver.find_element_by_id("UserName")
-            password_field = driver.find_element_by_id("Password")
-            submit_button = driver.find_element_by_id("btn-login")
-            # set value to fields
-            username_field.send_keys(self._username)
-            password_field.send_keys(self._password)
-            submit_button.click()
-            
-            
-            wait.until(presence_of_element_located((By.CSS_SELECTOR, ".profile-sidebar-portlet")))
-            results = driver.find_elements_by_class_name("profile-usertitle-name")
-            print("Hello, {0}".format(results[0].text))
-            
-            if mission and mission == "in":
-                set_in_button = driver.find_element_by_id("btnSetInTime")
-                set_in_button.click()
-                print("Good morning! Your attendence has been set!")
-            elif mission and mission == "out":
-                set_out_button = driver.find_element_by_id("btnSetOutTime")
-                set_out_button.click()
-                print("Good afternoon! Your set out time has been set!")
-                
-            driver.close()
         
         return True
         
