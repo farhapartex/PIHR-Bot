@@ -10,20 +10,25 @@ logger = get_task_logger(__name__)
 app = Celery('periodic', broker="pyamqp://guest@localhost//")
 
 @app.task
-def see_you():
-    logger.info("Sent feedback email")
-    print("See you in ten seconds!")
+def login():
+    logger.info("user login")
+    print("See you in user login!")
+
+@app.task
+def get_in():
+    logger.info("user get in")
+    print("See you in get in!")
 
 
 app.conf.beat_schedule = {
-    "see-you-in-ten-seconds-task": {
-        "task": "task.see_you",
+    "user-login": {
+        "task": "task.login",
         "schedule": crontab(minute='*/1'),
+        # 'args': (16, 16),
+    },
+    "user-get-in": {
+        "task": "task.get_in",
+        "schedule": crontab(minute='*/2'),
         # 'args': (16, 16),
     }
 }
-
-# @periodic_task(run_every=(crontab(minute='*/15')), name="some_task", ignore_result=True)
-# def some_task():
-#     logger.info("Sent feedback email")
-#     print("See you in ten seconds!")

@@ -7,46 +7,74 @@ from selenium.webdriver.support.expected_conditions import presence_of_element_l
 
 import pandas as pd, numpy as np
 import datetime, time, sys
+from files import *
 
 class PIHRBot:
-    def __init__(self, username, password, company_name):
-        self.username, self.password = username, password
-        self.url = "http://{0}.pihr.xyz/Login/Index".format(company_name)
-        self.chrome_driver_path = "/home/nazmul/Documents/myProjects/scrapper/pi-hr-scrapper/chromedriver"
-        self.webdriver = None
-        
+    def __init__(self):
+        credentials = get_credentials()
+        self._username, self._password = credentials[0], credentials[1]
+        self._url = "http://{0}.pihr.xyz/Login/Index".format("strativ")
+        self._chrome_driver_path, self._webdriver = "", None
         self.get_ready_browser()
+        self.get_login()
+        self.get_in()
     
     
     def get_ready_browser(self):
-        chrome_options = Options()
-        chrome_options.add_argument("--headless")
+        try:
+            chrome_options = Options()
+            chrome_options.add_argument("--headless")
+            self._chrome_driver_path = CURRENT_DIR +"/driver/chromedriver"
 
-        self.webdriver = webdriver.Chrome(
-            executable_path=self.chrome_driver_path,
-            options = chrome_options
-            )
+            self._webdriver = webdriver.Chrome(
+                executable_path=self._chrome_driver_path,
+                options = chrome_options
+                )
+        except:
+            print("Driver not found!")
+        
     
-    def get_in_time(self):
-        now = datetime.datetime.now()
-        return now.replace(hour=10, minute=0, second=0, microsecond=0)
+    def get_login(self):
+        wait = WebDriverWait(self._webdriver, 10)
+        print("Mission started! Wait...")
+        self._webdriver.get(self._url)
+        # get fields
+        username_field = self._webdriver.find_element_by_id("UserName")
+        password_field = self._webdriver.find_element_by_id("Password")
+        submit_button = self._webdriver.find_element_by_id("btn-login")
+        # set value to fields
+        username_field.send_keys(self._username)
+        password_field.send_keys(self._password)
+        submit_button.click()
+          
+        wait.until(presence_of_element_located((By.CSS_SELECTOR, ".profile-sidebar-portlet")))
+        
     
-    def get_out_time(self):
-        now = datetime.datetime.now()
-        return now.replace(hour=17, minute=30, second=0, microsecond=0)
+    def get_in(self):
+        results = self._webdriver.find_elements_by_class_name("profile-usertitle-name")
+        print("Good morning! Your attendence has been set!")
+
+        # self.webdriver.close()
+    def get_out(self):
+        results = self._webdriver.find_elements_by_class_name("profile-usertitle-name")
+        print("Good afternoon! Your set out time has been set!")
     
-    def give_attendence(self, mission=None):
-        with self.webdriver as driver:
+    def driver_close(self):
+        self._webdriver.close()
+
+    
+    def give_attendance(self, mission=None):
+        with self._webdriver as driver:
             wait = WebDriverWait(driver, 10)
             print("Mission started! Wait...")
-            driver.get(self.url)
+            driver.get(self._url)
             # get fields
             username_field = driver.find_element_by_id("UserName")
             password_field = driver.find_element_by_id("Password")
             submit_button = driver.find_element_by_id("btn-login")
             # set value to fields
-            username_field.send_keys(self.username)
-            password_field.send_keys(self.password)
+            username_field.send_keys(self._username)
+            password_field.send_keys(self._password)
             submit_button.click()
             
             
@@ -67,23 +95,5 @@ class PIHRBot:
         
         return True
         
-
-if __name__ == "__main__":
-    print("Welcome to PI HR Bot")
-    while True:
-        username = input("Enter Your username: ")
-        password = input("Enter Your password: ")
-        if not username or not password:
-            print("Please provide username and password")
-        else:
-            break
-    mission = input("Mission: ")
-    bot = PIHRBot(username=username, password=password, company_name="strativ")
     
-    if bot.give_attendence(mission):
-        print("Mission is done! yeee!")
-    else:
-        print("It seems there are some problems. Try again!")
-        
-        
-        
+    
