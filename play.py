@@ -13,6 +13,3 @@ if __name__ == "__main__":
             install = Install()
     except:
         print("It seems there are some problems. Try again!")
-
-            
-    

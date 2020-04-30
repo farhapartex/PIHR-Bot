@@ -11,24 +11,26 @@ app = Celery('periodic', broker="pyamqp://guest@localhost//")
 
 @app.task
 def login():
-    logger.info("user login")
+    logger.info("It is night 8:50")
     print("See you in user login!")
 
 @app.task
 def get_in():
-    logger.info("user get in")
+    logger.info("It is night 8:52")
     print("See you in get in!")
 
 
 app.conf.beat_schedule = {
     "user-login": {
         "task": "task.login",
-        "schedule": crontab(minute='*/1'),
-        # 'args': (16, 16),
+        "schedule": crontab(hour=20, minute=50),
+        'args': None,
     },
     "user-get-in": {
         "task": "task.get_in",
-        "schedule": crontab(minute='*/2'),
-        # 'args': (16, 16),
+        "schedule": crontab(hour=20, minute=52),
+        'args': None,
     }
 }
+
+app.conf.timezone = 'Asia/Dhaka'
