@@ -24,12 +24,12 @@ def get_out():
 app.conf.beat_schedule = {
     "user-login": {
         "task": "task.get_in",
-        "schedule": crontab(hour=13, minute=46),
+        "schedule": crontab(hour=int(bot.in_time.split(":")[0]), minute=int(bot.in_time.split(":")[1])),
         'args': None,
     },
     "user-get-in": {
         "task": "task.get_out",
-        "schedule": crontab(hour=13, minute=16),
+        "schedule": crontab(hour=int(bot.out_time.split(":")[0]), minute=int(bot.out_time.split(":")[1])),
         'args': None,
     }
 }

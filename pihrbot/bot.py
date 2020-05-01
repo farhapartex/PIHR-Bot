@@ -7,7 +7,7 @@ from selenium.webdriver.support.expected_conditions import presence_of_element_l
 
 import pandas as pd, numpy as np
 import datetime, time, sys
-from files import BASE_DIR, get_credentials
+from files import BASE_DIR, get_credentials, get_time
 
 class PIHRBot:
     def __init__(self):
@@ -16,6 +16,8 @@ class PIHRBot:
         self._username, self._password = credentials[0], credentials[1]
         self._url = "http://{0}.pihr.xyz/Login/Index".format("strativ")
         self._chrome_driver_path, self._webdriver = "", None
+        self.in_time, self.out_time = get_time()
+
         self._get_ready_browser()
         self._get_login()
     

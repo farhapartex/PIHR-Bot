@@ -28,9 +28,15 @@ def get_credentials():
         user_file.close()
         return (username, password)
 
+def get_time():
+    with open(BASE_DIR + "/pihrbot/timer.txt", "r") as times:
+        in_time, out_time = [ch.replace("\n", "") for ch in times.readlines()]
+        times.close()
+        return (in_time, out_time)
+
 def check_driver_exists():
     try:
         return True if Path(BASE_DIR +"/driver/chromedriver").is_file() else False
     except:
         return False
-    
+
