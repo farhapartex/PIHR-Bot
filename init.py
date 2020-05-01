@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 import os, sys
 
-BASE_DIR = os.getcwd()
-
 def main():
     try:
         from setting import settings
