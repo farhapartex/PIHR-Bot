@@ -11,6 +11,7 @@ from files import BASE_DIR, get_credentials
 
 class PIHRBot:
     def __init__(self):
+        print("Welcome to PI HR Bot")
         credentials = get_credentials()
         self._username, self._password = credentials[0], credentials[1]
         self._url = "http://{0}.pihr.xyz/Login/Index".format("strativ")

@@ -16,3 +16,4 @@ class Install:
                 break
         if create_and_set_credentials(username, password):
             print("Setup is done with credentials")
+            print("Run python3 init.py run")
