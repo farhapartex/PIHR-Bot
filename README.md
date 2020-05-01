@@ -2,9 +2,9 @@
 This bot can be used to make attendance as an employee of PI HR system
 
 ## Features
-* Make attendance for get in & get out
-* Change time for get in & get out
-* Pause any feature of making attendance between get in & get out
+* Make attendance for `get in` & `get out`
+* Change time for `get in` & `get out`
+* Pause any feature of making attendance between `get in` & `get out`
 
 ### Some prerequisite:
 * Python ">=3.6"
@@ -43,4 +43,13 @@ Substitute in appropriate values for `myuser`, `mypassword` and `myvhost` above
 Installation complete! Now let's use this bot.
 Open your terminal and run `sudo rabbitmq-server` which will start RabbitMQ server. Open another terminal in the root folder and run `python3 play.py` which will turn on the bot.
 Every morning at 10:00AM it will give your attendance & every afternoon at 5:30PM it will set your out time.
+
+
+## Advance options
+By default this bot make attendance every morning at `10:00 am` & every evening at `6:00 pm`. It is very natural that this time is quite different for yours. So you can change the time schedule. To do this follow below commands
+* Check is your virtual environment is running or not. If it is not running, turn it on
+* in project root folder run `python3 init.py timechange`
+* provide `in time` & `out time` with this format `hh:mm am/pm`
+* that's all!
+* run `python3 init.py run` to start this bot again!
 
