@@ -1,9 +1,13 @@
 Pipfile.lock
-celerybeat-schedule.bak
-celerybeat-schedule.dat
-celerybeat-schedule.dir
 Pipfile
 /Pipfile
 credentials.txt
 driver/*
 driver
+pihrbot/__pycache__
+pihrbot/__pycache__/*
+setting/__pycache__
+setting/__pycache__/*
+pihrbot/celerybeat-schedule.bak
+pihrbot/celerybeat-schedule.dat
+pihrbot/celerybeat-schedule.dir

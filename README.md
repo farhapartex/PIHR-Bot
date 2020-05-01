@@ -12,7 +12,7 @@ To use this bot, you have to follow one time installation process. It may take f
 
 * Clone this project & navigate to the root folder
 * In the root folder install virtual environment. (It is your choice that, how you want to use virtual environment. If you are familiar with `pipenv`, just run `pipenv install`. It will install all packages, will create virtual environment & start it. Otherwise after creating virtual environment, install all packages from requirements.txt file)
-* Run this command to start the bot! `python3 play.py`
+* Run this command to start the bot! `python3 init.py run`
 * First time this bot will ask your username & password of PI HR. Don't be panic, it will not be uploaded anywhere. Provide all of those. This is one time installation.
 
 ### Choose & download your browser driver
