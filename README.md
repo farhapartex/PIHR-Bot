@@ -1,5 +1,10 @@
-## PI HR Bot
+# PI HR Bot
 This bot can be used to make attendance as an employee of PI HR system
+
+## Features
+* Make attendance for get in & get out
+* Change time for get in & get out
+* Pause any feature of making attendance between get in & get out
 
 ### Some prerequisite:
 * Python ">=3.6"
