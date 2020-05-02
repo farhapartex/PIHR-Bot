@@ -46,10 +46,14 @@ Every morning at 10:00AM it will give your attendance & every afternoon at 5:30P
 
 
 ## Advance options
-By default this bot make attendance every morning at `10:00 am` & every evening at `6:00 pm`. It is very natural that this time is quite different for yours. So you can change the time schedule. To do this follow below commands
+
+### Time schedule change
+By default this bot make attendance every morning at `9:00 am` & every evening at `6:00 pm`. It is very natural that this time is quite different for yours. So you can change the time schedule. To do this follow below commands
 * Check is your virtual environment is running or not. If it is not running, **turn it on**
 * in project root folder run `python3 init.py timechange`
 * provide `in time` & `out time` with this format `hh:mm am/pm`
 * that's all!
 * run `python3 init.py run` to start this bot again!
+
+### Help!
 
