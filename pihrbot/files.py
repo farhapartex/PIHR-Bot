@@ -9,6 +9,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def check_file_exists():
     return True if Path(BASE_DIR +"/setting/credentials.txt").is_file() else False
 
+def set_timer():
+    try:
+        with open(BASE_DIR + "/pihrbot/timer.txt", "a") as timer:
+            timer.write("9:00 am"+ "\n")
+            timer.write("6:00 pm"+ "\n")
+            timer.close()
+            return True
+    except:
+        return False
+
 def create_and_set_credentials(username, password, company):
     try:
         with open(BASE_DIR + "/setting/credentials.txt", "a") as user_file:
@@ -16,7 +26,9 @@ def create_and_set_credentials(username, password, company):
             user_file.write(password+ "\n")
             user_file.write(company+ "\n")
             user_file.close()
-            return True
+        
+        set_timer()
+        return True
     except:
         return False
 
@@ -29,9 +41,13 @@ def get_credentials():
 
 
 def get_time():
+    if not Path(BASE_DIR + '/pihrbot/timer.txt').is_file():
+        set_timer()
+
     with open(BASE_DIR + "/pihrbot/timer.txt", "r") as times:
         in_time, out_time = [ch.replace("\n", "") for ch in times.readlines()]
         times.close()
+    
     in_time = in_time.split()
     out_time = out_time.split()
 
@@ -57,6 +73,8 @@ def change_time(in_time, out_time):
             times.write(in_time+ "\n")
             times.write(out_time+ "\n")
             times.close()
+        
+        print("Time changes successfully!")
         return True
     except:
         return False

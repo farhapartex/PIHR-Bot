@@ -17,4 +17,5 @@ class Install:
                 break
         if create_and_set_credentials(username, password, company):
             print("Setup is done with credentials")
+            print("Make sure your RabbitMQ server is running before running below command")
             print("Run python3 init.py run")

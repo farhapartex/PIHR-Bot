@@ -26,3 +26,5 @@ def check_args(args):
             change_time(in_time, out_time)
         except:
             print("It seems there are some problems. Try again!")
+    else:
+        print("Command not found!")
