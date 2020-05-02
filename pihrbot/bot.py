@@ -10,11 +10,13 @@ import datetime, time, sys
 from files import BASE_DIR, get_credentials, get_time
 
 class PIHRBot:
+
     def __init__(self):
         print("Welcome to PI HR Bot")
         credentials = get_credentials()
         self._username, self._password = credentials[0], credentials[1]
         self._url = "http://{0}.pihr.xyz/Login/Index".format(credentials[2])
+        print(self._url)
         self._chrome_driver_path, self._webdriver = "", None
         self.in_time, self.out_time = get_time()
 
@@ -37,20 +39,25 @@ class PIHRBot:
         
     
     def _get_login(self):
-        wait = WebDriverWait(self._webdriver, 10)
-        print("Mission started! Wait...")
-        self._webdriver.get(self._url)
-        # get fields
-        username_field = self._webdriver.find_element_by_id("UserName")
-        password_field = self._webdriver.find_element_by_id("Password")
-        submit_button = self._webdriver.find_element_by_id("btn-login")
-        # set value to fields
-        username_field.send_keys(self._username)
-        password_field.send_keys(self._password)
-        submit_button.click()
-          
-        wait.until(presence_of_element_located((By.CSS_SELECTOR, ".profile-sidebar-portlet")))
-        
+        try:
+            wait = WebDriverWait(self._webdriver, 10)
+            print("Mission started! Wait...")
+            self._webdriver.get(self._url)
+            # get fields
+            username_field = self._webdriver.find_element_by_id("UserName")
+            password_field = self._webdriver.find_element_by_id("Password")
+            submit_button = self._webdriver.find_element_by_id("btn-login")
+            # set value to fields
+            username_field.send_keys(self._username)
+            password_field.send_keys(self._password)
+            submit_button.click()
+
+            wait.until(presence_of_element_located((By.CSS_SELECTOR, ".profile-sidebar-portlet")))
+            return True
+        except:
+            print("Check login url, try again!")
+            return False
+           
     
     def get_in(self):
         results = self._webdriver.find_elements_by_class_name("profile-usertitle-name")
