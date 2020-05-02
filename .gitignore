@@ -2,6 +2,7 @@ Pipfile.lock
 Pipfile
 /Pipfile
 credentials.txt
+settings/credentials.txt
 driver/*
 driver
 pihrbot/__pycache__

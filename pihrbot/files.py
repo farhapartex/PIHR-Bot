@@ -7,13 +7,14 @@ CURRENT_DIR = os.getcwd()
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def check_file_exists():
-    return True if Path(BASE_DIR +"/credentials.txt").is_file() else False
+    return True if Path(BASE_DIR +"/setting/credentials.txt").is_file() else False
 
-def create_and_set_credentials(username, password):
+def create_and_set_credentials(username, password, company):
     try:
-        with open(BASE_DIR + "/credentials.txt", "a") as user_file:
+        with open(BASE_DIR + "/setting/credentials.txt", "a") as user_file:
             user_file.write(username+ "\n")
             user_file.write(password+ "\n")
+            user_file.write(company+ "\n")
             user_file.close()
             return True
     except:
@@ -21,10 +22,10 @@ def create_and_set_credentials(username, password):
 
 
 def get_credentials():
-    with open(BASE_DIR + "/credentials.txt", "r") as user_file:
-        username, password = [ch.replace("\n", "") for ch in user_file.readlines()]
+    with open(BASE_DIR + "/setting/credentials.txt", "r") as user_file:
+        username, password, company = [ch.replace("\n", "") for ch in user_file.readlines()]
         user_file.close()
-        return (username, password)
+        return (username, password, company)
 
 
 def get_time():

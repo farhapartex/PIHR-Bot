@@ -14,7 +14,7 @@ class PIHRBot:
         print("Welcome to PI HR Bot")
         credentials = get_credentials()
         self._username, self._password = credentials[0], credentials[1]
-        self._url = "http://{0}.pihr.xyz/Login/Index".format("strativ")
+        self._url = "http://{0}.pihr.xyz/Login/Index".format(credentials[2])
         self._chrome_driver_path, self._webdriver = "", None
         self.in_time, self.out_time = get_time()
 

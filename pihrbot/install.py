@@ -10,10 +10,11 @@ class Install:
         while True:
             username = input("Enter Your username: ")
             password = input("Enter Your password: ")
-            if not username or not password:
-                print("Username and password can't be empty, try again!")
+            company = input("Enter Your company: ")
+            if not username or not password or not company:
+                print("Username, password and company can't be empty, try again!")
             else:
                 break
-        if create_and_set_credentials(username, password):
+        if create_and_set_credentials(username, password, company):
             print("Setup is done with credentials")
             print("Run python3 init.py run")
