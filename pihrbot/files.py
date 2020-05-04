@@ -14,6 +14,8 @@ def set_timer():
         with open(BASE_DIR + "/pihrbot/timer.txt", "a") as timer:
             timer.write("9:00 am"+ "\n")
             timer.write("6:00 pm"+ "\n")
+            timer.write("Saturday"+ "\n")
+            timer.write("Sunday"+ "\n")
             timer.close()
             return True
     except:
@@ -45,9 +47,10 @@ def get_time():
         set_timer()
 
     with open(BASE_DIR + "/pihrbot/timer.txt", "r") as times:
-        in_time, out_time = [ch.replace("\n", "") for ch in times.readlines()]
+        data = [ch.replace("\n", "") for ch in times.readlines()]
         times.close()
     
+    in_time, out_time = data[0], data[1]
     in_time = in_time.split()
     out_time = out_time.split()
 
@@ -69,9 +72,12 @@ def get_time():
 def change_time(in_time, out_time):
     try:
         with open(BASE_DIR + "/pihrbot/timer.txt", "r+") as times:
+            data = [ch.replace("\n", "") for ch in times.readlines()]
             times.seek(0)
             times.write(in_time+ "\n")
             times.write(out_time+ "\n")
+            times.write(data[2]+ "\n")
+            times.write(data[3]+ "\n")
             times.close()
         
         print("Time changes successfully!")
@@ -79,6 +85,8 @@ def change_time(in_time, out_time):
     except:
         return False
 
+
+change_time('10:00 am', '11:00 pm')
 
 def check_driver_exists():
     try:

@@ -6,7 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.expected_conditions import presence_of_element_located
 
 import pandas as pd, numpy as np
-import datetime, time, sys
+import datetime, calendar, time, sys
 from files import BASE_DIR, get_credentials, get_time
 
 class PIHRBot:
@@ -16,7 +16,8 @@ class PIHRBot:
         credentials = get_credentials()
         self._username, self._password = credentials[0], credentials[1]
         self._url = "http://{0}.pihr.xyz/Login/Index".format(credentials[2])
-        print(self._url)
+        today = datetime.date.today()
+        self._weekday = calendar.day_name[today.weekday()]
         self._chrome_driver_path, self._webdriver = "", None
         self.in_time, self.out_time = get_time()
 
@@ -60,6 +61,7 @@ class PIHRBot:
            
     
     def get_in(self):
+        
         results = self._webdriver.find_elements_by_class_name("profile-usertitle-name")
         print("Good morning! Your attendence has been set!")
 
