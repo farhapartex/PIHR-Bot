@@ -26,5 +26,12 @@ def check_args(args):
             change_time(in_time, out_time)
         except:
             print("It seems there are some problems. Try again!")
+    elif args[0] == "init.py" and args[1] == "weekendchange":
+        try:
+            day1 = input("Type first day of weekend ")
+            day2 = input("Type second day of weekend ")
+            change_weekend(day1, day2)
+        except:
+            print("It seems there are some problems. Try again!")
     else:
         print("Command not found!")

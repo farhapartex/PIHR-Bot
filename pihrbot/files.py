@@ -80,13 +80,28 @@ def change_time(in_time, out_time):
             times.write(data[3]+ "\n")
             times.close()
         
-        print("Time changes successfully!")
+        print("Time changed successfully!")
         return True
     except:
         return False
 
 
-change_time('10:00 am', '11:00 pm')
+def change_weekend(day1, day2):
+    try:
+        with open(BASE_DIR + "/pihrbot/timer.txt", "r+") as times:
+            data = [ch.replace("\n", "") for ch in times.readlines()]
+            times.seek(0)
+            times.write(data[0]+ "\n")
+            times.write(data[1]+ "\n")
+            times.write(day1.title() + "\n")
+            times.write(day2.title() + "\n")
+            times.close()
+        
+        print("Weekend changed successfully!")
+        return True
+    except:
+        return False
+
 
 def check_driver_exists():
     try:
