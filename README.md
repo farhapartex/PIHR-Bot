@@ -56,4 +56,4 @@ By default this bot make attendance every morning at `9:00 am` & every evening a
 * run `python3 init.py run` to start this bot again!
 
 ### Help!
-
+* For help type `python3 init.py help`
