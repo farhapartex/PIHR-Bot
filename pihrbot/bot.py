@@ -66,6 +66,8 @@ class PIHRBot:
             print("Today is weekend, no get in or get out!")  
         else:
             results = self._webdriver.find_elements_by_class_name("profile-usertitle-name")
+            set_in_button = self._webdriver.find_element_by_id("btnSetInTime")
+            set_in_button.click()
             print("Good morning! Your attendance has been set!")
             
 
