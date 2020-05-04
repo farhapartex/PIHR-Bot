@@ -103,6 +103,14 @@ def change_weekend(day1, day2):
         return False
 
 
+def get_weekend():
+    with open(BASE_DIR + "/pihrbot/timer.txt", "r") as times:
+        data = [ch.replace("\n", "") for ch in times.readlines()]
+        times.close()
+    
+    return (data[2], data[3])
+
+
 def check_driver_exists():
     try:
         return True if Path(BASE_DIR +"/driver/chromedriver").is_file() else False

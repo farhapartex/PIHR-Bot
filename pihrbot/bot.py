@@ -7,7 +7,7 @@ from selenium.webdriver.support.expected_conditions import presence_of_element_l
 
 import pandas as pd, numpy as np
 import datetime, calendar, time, sys
-from files import BASE_DIR, get_credentials, get_time
+from files import BASE_DIR, get_credentials, get_time, get_weekend
 
 class PIHRBot:
 
@@ -20,6 +20,7 @@ class PIHRBot:
         self._weekday = calendar.day_name[today.weekday()]
         self._chrome_driver_path, self._webdriver = "", None
         self.in_time, self.out_time = get_time()
+        self._day1, self._day2 = get_weekend()
 
         self._get_ready_browser()
         self._get_login()
@@ -61,14 +62,20 @@ class PIHRBot:
            
     
     def get_in(self):
-        
-        results = self._webdriver.find_elements_by_class_name("profile-usertitle-name")
-        print("Good morning! Your attendence has been set!")
+        if self._weekday == self._day1 or self._weekday == self._day2:
+            print("Today is weekend, no get in or get out!")  
+        else:
+            results = self._webdriver.find_elements_by_class_name("profile-usertitle-name")
+            print("Good morning! Your attendance has been set!")
+            
 
         # self.webdriver.close()
     def get_out(self):
-        results = self._webdriver.find_elements_by_class_name("profile-usertitle-name")
-        print("Good afternoon! Your set out time has been set!")
+        if self._weekday == self._day1 or self._weekday == self._day2:
+            print("Today is weekend, no get in or get out!")
+        else:
+            results = self._webdriver.find_elements_by_class_name("profile-usertitle-name")
+            print("Good afternoon! Your set out time has been set!")
     
     def driver_close(self):
         self._webdriver.close()
