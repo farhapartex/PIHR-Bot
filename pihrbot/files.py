@@ -28,7 +28,7 @@ def create_and_set_credentials(username, password, company):
         label = ['username', 'password', 'company', 'get_in', 'get_out', 'weekend1', 'weekend2', 'get_in_feature', 'get_out_feature']
         data = [username, password, company, '10:00 am', '5:00 pm', 'Saturday', 'Sunday', 'true', 'false']
         df = pd.DataFrame([data], columns=label)
-        df.to_csv(os.path.join(BASE_DIR, "credentials.csv"))
+        df.to_csv(os.path.join(BASE_DIR, "credentials.csv"), index=False)
         return True
     except:
         return False
@@ -88,20 +88,18 @@ def change_time(in_time, out_time):
 
 def change_weekend(day1, day2):
     try:
-        with open(BASE_DIR + "/pihrbot/timer.txt", "r+") as times:
-            data = [ch.replace("\n", "") for ch in times.readlines()]
-            times.seek(0)
-            times.write(data[0]+ "\n")
-            times.write(data[1]+ "\n")
-            times.write(day1.title() + "\n")
-            times.write(day2.title() + "\n")
-            times.close()
+        df = pd.read_csv(BASE_DIR + "/credentials.csv")
+        weekend1, weekend2 = df['weekend1'][0], df['weekend2'][0]
+        df.loc[df.weekend1==weekend1, 'weekend1'] = day1
+        df.loc[df.weekend2==weekend2, 'weekend2'] = day2
+        df.to_csv(os.path.join(BASE_DIR, "credentials.csv"), index=False)
         
         print("Weekend changed successfully!")
         return True
     except:
+        print("There are some error!")
         return False
-
+        
 
 def get_weekend():
     try:
