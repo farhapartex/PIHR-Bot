@@ -65,10 +65,15 @@ class PIHRBot:
         if self._weekday == self._day1 or self._weekday == self._day2:
             print("Today is weekend, no get in or get out!")  
         else:
-            results = self._webdriver.find_elements_by_class_name("profile-usertitle-name")
-            set_in_button = self._webdriver.find_element_by_id("btnSetInTime")
-            set_in_button.click()
-            print("Good morning! Your attendance has been set!")
+            try:
+                results = self._webdriver.find_elements_by_class_name("profile-usertitle-name")
+                set_in_button = self._webdriver.find_element_by_id("btnSetInTime")
+                set_in_button.click()
+                print("Good morning! Your attendance has been set!")     
+            except:
+                pass
+            
+            
             
 
         # self.webdriver.close()
@@ -76,10 +81,14 @@ class PIHRBot:
         if self._weekday == self._day1 or self._weekday == self._day2:
             print("Today is weekend, no get in or get out!")
         else:
-            results = self._webdriver.find_elements_by_class_name("profile-usertitle-name")
-            set_out_button = self._webdriver.find_element_by_id("btnSetOutTime")
-            set_out_button.click()
-            print("Good afternoon! Your set out time has been set!")
+            try:
+                results = self._webdriver.find_elements_by_class_name("profile-usertitle-name")
+                set_out_button = self._webdriver.find_element_by_id("btnSetOutTime")
+                set_out_button.click()
+                print("Good afternoon! Your set out time has been set!")
+            except:
+                pass
+            
     
     def driver_close(self):
         self._webdriver.close()

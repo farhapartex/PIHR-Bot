@@ -1,4 +1,6 @@
 from pathlib import Path
+import pandas as pd
+import numpy as np
 import os
 import os.path
 # from pihrbot.bot import settings
@@ -7,7 +9,7 @@ CURRENT_DIR = os.getcwd()
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def check_file_exists():
-    return True if Path(BASE_DIR +"/setting/credentials.txt").is_file() else False
+    return True if Path(BASE_DIR +"/credentials.csv").is_file() else False
 
 def set_timer():
     try:
@@ -23,34 +25,32 @@ def set_timer():
 
 def create_and_set_credentials(username, password, company):
     try:
-        with open(BASE_DIR + "/setting/credentials.txt", "a") as user_file:
-            user_file.write(username+ "\n")
-            user_file.write(password+ "\n")
-            user_file.write(company+ "\n")
-            user_file.close()
-        
-        set_timer()
+        label = ['username', 'password', 'company', 'get_in', 'get_out', 'weekend1', 'weekend2', 'get_in_feature', 'get_out_feature']
+        data = [username, password, company, '10:00 am', '5:00 pm', 'Saturday', 'Sunday', 'true', 'false']
+        df = pd.DataFrame([data], columns=label)
+        df.to_csv(os.path.join(BASE_DIR, "credentials.csv"))
         return True
     except:
         return False
 
 
 def get_credentials():
-    with open(BASE_DIR + "/setting/credentials.txt", "r") as user_file:
-        username, password, company = [ch.replace("\n", "") for ch in user_file.readlines()]
-        user_file.close()
+    try:
+        df = pd.read_csv(BASE_DIR + "/credentials.csv")
+        username, password, company = df['username'][0], df['password'][0], df['company'][0]
         return (username, password, company)
+    except:
+        pass
 
 
 def get_time():
-    if not Path(BASE_DIR + '/pihrbot/timer.txt').is_file():
-        set_timer()
 
-    with open(BASE_DIR + "/pihrbot/timer.txt", "r") as times:
-        data = [ch.replace("\n", "") for ch in times.readlines()]
-        times.close()
+    try:
+        df = pd.read_csv(BASE_DIR + "/credentials.csv")
+        in_time, out_time = df['get_in'][0], df['get_out'][0]
+    except:
+        in_time, out_time = '10:00 am', '6:00 pm'
     
-    in_time, out_time = data[0], data[1]
     in_time = in_time.split()
     out_time = out_time.split()
 
@@ -104,11 +104,13 @@ def change_weekend(day1, day2):
 
 
 def get_weekend():
-    with open(BASE_DIR + "/pihrbot/timer.txt", "r") as times:
-        data = [ch.replace("\n", "") for ch in times.readlines()]
-        times.close()
+    try:
+        df = pd.read_csv(BASE_DIR + "/credentials.csv")
+        weekend1, weekend2 = df['weekend1'][0], df['weekend2'][0]
+    except:
+        weekend1, weekend2 = 'Saturday', 'Sunday'
     
-    return (data[2], data[3])
+    return (weekend1, weekend2)
 
 
 def check_driver_exists():

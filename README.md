@@ -54,6 +54,3 @@ By default this bot make attendance every morning at `9:00 am` & every evening a
 * provide `in time` & `out time` with this format `hh:mm am/pm`
 * that's all!
 * run `python3 init.py run` to start this bot again!
-
-### Help!
-* For help type `python3 init.py help`
