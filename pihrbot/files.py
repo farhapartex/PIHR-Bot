@@ -71,20 +71,18 @@ def get_time():
 
 def change_time(in_time, out_time):
     try:
-        with open(BASE_DIR + "/pihrbot/timer.txt", "r+") as times:
-            data = [ch.replace("\n", "") for ch in times.readlines()]
-            times.seek(0)
-            times.write(in_time+ "\n")
-            times.write(out_time+ "\n")
-            times.write(data[2]+ "\n")
-            times.write(data[3]+ "\n")
-            times.close()
+        df = pd.read_csv(BASE_DIR + "/credentials.csv")
+        get_in, get_out = df['get_in'][0], df['get_out'][0]
+        df.loc[df.get_in==get_in, 'get_in'] = in_time
+        df.loc[df.get_out==get_out, 'get_out'] = out_time
+        df.to_csv(os.path.join(BASE_DIR, "credentials.csv"), index=False)
         
         print("Time changed successfully!")
         return True
     except:
         return False
 
+d = change_time('11:00 am', '6:00 pm')
 
 def change_weekend(day1, day2):
     try:
@@ -99,7 +97,7 @@ def change_weekend(day1, day2):
     except:
         print("There are some error!")
         return False
-        
+
 
 def get_weekend():
     try:

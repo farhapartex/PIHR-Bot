@@ -1,7 +1,7 @@
 Pipfile.lock
 Pipfile
 /Pipfile
-credentials.txt
+credentials.csv
 settings/credentials.txt
 driver/*
 driver
@@ -12,4 +12,3 @@ setting/__pycache__/*
 pihrbot/celerybeat-schedule.bak
 pihrbot/celerybeat-schedule.dat
 pihrbot/celerybeat-schedule.dir
-pihrbot/timer.txt
