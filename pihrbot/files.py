@@ -11,17 +11,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def check_file_exists():
     return True if Path(BASE_DIR +"/credentials.csv").is_file() else False
 
-def set_timer():
-    try:
-        with open(BASE_DIR + "/pihrbot/timer.txt", "a") as timer:
-            timer.write("9:00 am"+ "\n")
-            timer.write("6:00 pm"+ "\n")
-            timer.write("Saturday"+ "\n")
-            timer.write("Sunday"+ "\n")
-            timer.close()
-            return True
-    except:
-        return False
 
 def create_and_set_credentials(username, password, company):
     try:
@@ -82,7 +71,6 @@ def change_time(in_time, out_time):
     except:
         return False
 
-d = change_time('11:00 am', '6:00 pm')
 
 def change_weekend(day1, day2):
     try:
