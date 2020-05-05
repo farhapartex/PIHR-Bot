@@ -12,3 +12,4 @@ setting/__pycache__/*
 pihrbot/celerybeat-schedule.bak
 pihrbot/celerybeat-schedule.dat
 pihrbot/celerybeat-schedule.dir
+.~lock.credentials.csv#
