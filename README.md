@@ -21,13 +21,10 @@ To use this bot, you have to follow one time installation process. It may take f
 * First time this bot will ask your username & password of PI HR. Don't be panic, it will not be uploaded anywhere. Provide all of those. This is one time installation.
 
 ### Choose & download your browser driver
-This bot use headless browser driver. So you need to download your own driver. You can select which browser you want to use. From below link choose your one's
+This bot use headless browser driver. So you need to download your own driver. You need to select chrome browser driver. From below link choose your one's
 * For chrome navigate to this [Google Chrome](https://sites.google.com/a/chromium.org/chromedriver/downloads)
-* For Firefox navigate to this [Firefox](https://github.com/mozilla/geckodriver/releases)
-* For Edge navigate to this [Edge](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/)
-* For Safari navigate to this [Safari](https://webkit.org/blog/6900/webdriver-support-in-safari-10/)
 
-Before downloading your browser driver, don't forget to choose your os and browser version. Suppose you want to use google chrome browse. Then check version of google chrome of your computer.
+Before downloading your browser driver, don't forget to choose your os and browser version. For browser version, check version of google chrome of your computer.
 Now create a folder named with `driver` and keep your browser driver in this `driver` folder. **Please don't put your downloaded browser driver out of driver folder, otherwise it raise an error!**
 
 ### Install RabbitMQ
