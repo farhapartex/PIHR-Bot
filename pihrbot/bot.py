@@ -7,7 +7,7 @@ from selenium.webdriver.support.expected_conditions import presence_of_element_l
 
 import pandas as pd, numpy as np
 import datetime, calendar, time, sys
-from files import BASE_DIR, get_credentials, get_time, get_weekend
+from files import BASE_DIR, get_credentials, get_time, get_weekend, has_get_in_feature, has_get_out_feature
 
 class PIHRBot:
 
@@ -62,32 +62,32 @@ class PIHRBot:
            
     
     def get_in(self):
-        if self._weekday == self._day1 or self._weekday == self._day2:
-            print("Today is weekend, no get in or get out!")  
-        else:
-            try:
-                results = self._webdriver.find_elements_by_class_name("profile-usertitle-name")
-                set_in_button = self._webdriver.find_element_by_id("btnSetInTime")
-                set_in_button.click()
-                print("Good morning! Your attendance has been set!")     
-            except:
-                pass
+        if has_get_in_feature():
+            if self._weekday == self._day1 or self._weekday == self._day2:
+                print("Today is weekend, no get in or get out!")  
+            else:
+                try:
+                    results = self._webdriver.find_elements_by_class_name("profile-usertitle-name")
+                    set_in_button = self._webdriver.find_element_by_id("btnSetInTime")
+                    set_in_button.click()
+                    print("Good morning! Your attendance has been set!")     
+                except:
+                    pass
             
             
             
-
-        # self.webdriver.close()
     def get_out(self):
-        if self._weekday == self._day1 or self._weekday == self._day2:
-            print("Today is weekend, no get in or get out!")
-        else:
-            try:
-                results = self._webdriver.find_elements_by_class_name("profile-usertitle-name")
-                set_out_button = self._webdriver.find_element_by_id("btnSetOutTime")
-                set_out_button.click()
-                print("Good afternoon! Your set out time has been set!")
-            except:
-                pass
+        if has_get_out_feature():
+            if self._weekday == self._day1 or self._weekday == self._day2:
+                print("Today is weekend, no get in or get out!")
+            else:
+                try:
+                    results = self._webdriver.find_elements_by_class_name("profile-usertitle-name")
+                    set_out_button = self._webdriver.find_element_by_id("btnSetOutTime")
+                    set_out_button.click()
+                    print("Good afternoon! Your set out time has been set!")
+                except:
+                    pass
             
     
     def driver_close(self):
