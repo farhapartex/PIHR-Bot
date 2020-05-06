@@ -54,3 +54,10 @@ By default this bot make attendance every morning at `9:00 am` & every evening a
 * provide `in time` & `out time` with this format `hh:mm am/pm`
 * that's all!
 * run `python3 init.py run` to start this bot again!
+
+### Pause get_in or get_out attendance feature
+You can pause get in or get out attendance feature. To do any of this run bellow commands:
+* to pause get in feature run `python3 init.py get_in_down`
+* to turn on get in feature run `python3 init.py get_in_up`
+* to turn on get out feature run `python3 init.py get_out_up`
+* to pause get out feature run `python3 init.py get_out_down`
