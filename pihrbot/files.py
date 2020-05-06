@@ -100,15 +100,16 @@ def has_get_in_feature():
     try:
         df = pd.read_csv(BASE_DIR + "/credentials.csv")
         get_in_feature = df['get_in_feature'][0]
-        return True if get_in_feature == "true" else False
+        return True if get_in_feature else False
     except:
         pass
+
 
 def has_get_out_feature():
     try:
         df = pd.read_csv(BASE_DIR + "/credentials.csv")
         get_out_feature = df['get_out_feature'][0]
-        return True if get_out_feature == "true" else False
+        return True if get_out_feature else False
     except:
         pass
 
