@@ -37,9 +37,10 @@ Install RabbitMQ from this link [RabbitMQ](https://www.rabbitmq.com/download.htm
 
 Substitute in appropriate values for `myuser`, `mypassword` and `myvhost` above
 
-Installation complete! Now let's use this bot.
+#### Installation complete! Now let's use this bot.
 Open your terminal and run `sudo rabbitmq-server` which will start RabbitMQ server. Open another terminal in the root folder and run `python3 init.py run` which will turn on the bot.
-Every morning at 10:00AM it will give your attendance & every afternoon at 5:30PM it will set your out time.
+Initially every morning at 10:00AM it will give your attendance, get out attendacne will be paused and weekend days weill be on Saturday & Sunday.
+But don't worry! You can modify features! 
 
 
 ## Advance options
